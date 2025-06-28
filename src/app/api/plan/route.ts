@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 
 // Format LLM text to HTML with custom rules
 function formatLLMTextToHtml(text: string): string {
@@ -8,7 +7,7 @@ function formatLLMTextToHtml(text: string): string {
   let html = '';
   let inList = false;
   let inSubList = false;
-  for (let line of lines) {
+  for (const line of lines) {
     const trimmed = line.trim();
     // Horizontal rule
     if (trimmed === '---') {
@@ -101,15 +100,12 @@ export async function POST(request: Request) {
       }),
     });
     data = await response.json();
-  } catch (err) {
-    return NextResponse.json({
-      error: true,
-      message: "Failed to connect to the AI service. Please try again later.",
-      llmRaw: null,
-      rawText: null,
-      formattedHtml: null,
-    }, { status: 500 });
-  }
+  } catch {
+      return NextResponse.json({
+        error: true,
+        message: "Failed to generate plan. Please try again later.",
+      }, { status: 500 });
+    }
 
   // Handle LLM error response
   if (data?.error) {

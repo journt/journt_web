@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       data: { name, email, phone, city, days: Number(days) },
     });
     return NextResponse.json({ success: true, lead });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: true, message: 'Failed to save lead.' }, { status: 500 });
   }
 }

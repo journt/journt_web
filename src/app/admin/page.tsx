@@ -24,7 +24,7 @@ export default function AdminPage() {
         setLeads(data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Failed to load leads");
         setLoading(false);
       });
