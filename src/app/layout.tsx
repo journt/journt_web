@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const poppins = Poppins({
@@ -27,9 +28,9 @@ export default function RootLayout({
           <nav className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
             <span className="font-bold text-xl tracking-tight text-primary">Journt</span>
             <ul className="flex gap-6 text-base font-medium">
-              <li><a href="/" className="hover:text-primary transition">Home</a></li>
-              <li><a href="/blog" className="hover:text-primary transition">Blog</a></li>
-              <li><a href="/store" className="hover:text-primary transition">Store</a></li>
+              <li><Link href="/" className="hover:text-primary transition">Home</Link></li>
+              <li><Link href="/blog" className="hover:text-primary transition">Blog</Link></li>
+              <li><Link href="/store" className="hover:text-primary transition">Store</Link></li>
             </ul>
           </nav>
         </header>

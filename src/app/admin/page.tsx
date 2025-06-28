@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 type Lead = {
   id: string | number;
@@ -69,11 +70,11 @@ export default function AdminPage() {
       </section>
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-4 text-accent">Blog Posts</h2>
-        <a href="/admin/blog" className="inline-block bg-primary text-black font-bold px-4 py-2 rounded shadow hover:bg-primary/90 mb-4">Manage Blog</a>
+        <Link href="/admin/blog" className="inline-block bg-primary text-black font-bold px-4 py-2 rounded shadow hover:bg-primary/90 mb-4">Manage Blog</Link>
       </section>
       <section>
         <h2 className="text-2xl font-semibold mb-4 text-accent">Store</h2>
-        <a href="/admin/store" className="inline-block bg-primary text-black font-bold px-4 py-2 rounded shadow hover:bg-primary/90">Manage Store</a>
+        <Link href="/admin/store" className="inline-block bg-primary text-black font-bold px-4 py-2 rounded shadow hover:bg-primary/90">Manage Store</Link>
       </section>
     </div>
   );

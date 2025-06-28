@@ -10,13 +10,11 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState<"input" | "summary" | "lead" | "detailed" | "payment">("input");
   const [rawText, setRawText] = useState<string | null>(null);
-  const [llmRaw, setLlmRaw] = useState<any>(null);
   // Lead form state
   const [lead, setLead] = useState({ name: "", email: "", phone: "" });
   const [leadError, setLeadError] = useState<string | null>(null);
   const [leadLoading, setLeadLoading] = useState(false);
   const [detailedText, setDetailedText] = useState<string | null>(null);
-  const [detailedRaw, setDetailedRaw] = useState<any>(null);
   const [showPayment, setShowPayment] = useState(false);
 
   // Step 1: Get summary
@@ -24,7 +22,6 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     setRawText(null);
-    setLlmRaw(null);
     setStep("input");
     const res = await fetch("/api/plan", {
       method: "POST",
@@ -33,7 +30,6 @@ export default function Home() {
     });
     const data = await res.json();
     setRawText(data.rawText);
-    setLlmRaw(data.llmRaw);
     setLoading(false);
     setStep("summary");
   };
@@ -70,7 +66,6 @@ export default function Home() {
     const planData = await planRes.json();
     console.log("Detailed plan response:", planData); // Debug log
     setDetailedText(planData.rawText);
-    setDetailedRaw(planData.llmRaw);
     setLeadLoading(false);
     setStep("detailed");
   };
