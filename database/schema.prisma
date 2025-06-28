@@ -1,0 +1,21 @@
+// Prisma schema for user leads
+// Run: npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./leads.db"
+}
+
+model Lead {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String
+  city      String
+  days      Int
+  createdAt DateTime @default(now())
+}
