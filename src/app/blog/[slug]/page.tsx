@@ -4,7 +4,6 @@ import matter from 'gray-matter';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { marked } from 'marked';
-import type { GetStaticPropsContext } from 'next';
 
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'src', 'content', 'blog');
