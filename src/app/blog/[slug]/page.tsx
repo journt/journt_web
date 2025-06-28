@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import { marked } from 'marked';
 
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'src', 'content', 'blog');
@@ -17,7 +18,6 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const fileContent = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(fileContent);
   // Convert markdown content to HTML
-  const marked = require('marked');
   const htmlContent = marked.parse(content);
   return (
     <main className="max-w-2xl mx-auto py-12 px-4">
