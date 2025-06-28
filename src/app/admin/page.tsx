@@ -38,7 +38,7 @@ export default function AdminPage() {
         {loading ? (
           <div>Loading leads...</div>
         ) : error ? (
-          <div className="text-red-600">{error}</div>
+          <div className="text-black-600">{error}</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white rounded shadow">
