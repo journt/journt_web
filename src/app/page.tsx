@@ -46,25 +46,45 @@ export default function Home() {
       return;
     }
     // Save lead
-    const leadRes = await fetch("/api/lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...lead, city, days }),
-    });
-    const leadData = await leadRes.json();
+    let leadRes, leadData;
+    try {
+      leadRes = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...lead, city, days }),
+      });
+      if (!leadRes.ok) throw new Error("Failed to save info (server error)");
+      leadData = await leadRes.json();
+    } catch (err) {
+      setLeadError("Could not save your info. Please try again later.");
+      setLeadLoading(false);
+      return;
+    }
     if (!leadData.success) {
       setLeadError(leadData.message || "Failed to save info.");
       setLeadLoading(false);
       return;
     }
     // Get detailed plan
-    const planRes = await fetch("/api/plan", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ city, days, promptType: "detailed" }),
-    });
-    const planData = await planRes.json();
-    console.log("Detailed plan response:", planData); // Debug log
+    let planRes, planData;
+    try {
+      planRes = await fetch("/api/plan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ city, days, promptType: "detailed" }),
+      });
+      if (!planRes.ok) throw new Error("Failed to generate plan (server error)");
+      planData = await planRes.json();
+    } catch (err) {
+      setLeadError("Could not generate your plan. Please try again later.");
+      setLeadLoading(false);
+      return;
+    }
+    if (!planData.rawText) {
+      setLeadError("No plan generated. Please try again later.");
+      setLeadLoading(false);
+      return;
+    }
     setDetailedText(planData.rawText);
     setLeadLoading(false);
     setStep("detailed");
