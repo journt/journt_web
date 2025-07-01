@@ -55,7 +55,7 @@ export default function Home() {
       });
       if (!leadRes.ok) throw new Error("Failed to save info (server error)");
       leadData = await leadRes.json();
-    } catch (err) {
+    } catch {
       setLeadError("Could not save your info. Please try again later.");
       setLeadLoading(false);
       return;
@@ -75,7 +75,7 @@ export default function Home() {
       });
       if (!planRes.ok) throw new Error("Failed to generate plan (server error)");
       planData = await planRes.json();
-    } catch (err) {
+    } catch {
       setLeadError("Could not generate your plan. Please try again later.");
       setLeadLoading(false);
       return;
